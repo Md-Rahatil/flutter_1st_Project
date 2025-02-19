@@ -1,40 +1,77 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPage(),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MainPage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Star Rating Example'),
-      ),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(5, (index) {
-            // Color logic for stars
-            Color starColor = index < 2 ? Colors.yellow : Colors.black;
-
-            return Icon(
-              Icons.star,
-              color: starColor,
-              size: 50,
-            );
-          }),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
         ),
-      ),
-    );
+        body: Container(
+          height: double.infinity,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.star,
+                size: 60,
+                color: Colors.yellow,
+              ),
+              Icon(
+                Icons.star,
+                size: 60,
+                color: Colors.yellow,
+              ),
+              Icon(
+                Icons.star,
+                size: 60,
+                color: Colors.grey,
+              ),
+            
+            
+            
+            
+            ],
+          ),
+        ));
   }
 }
